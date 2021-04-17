@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace RestWithASPNET.Controllers
 {
-    [ApiVersion("1")]
+    [ApiVersion("2")]
     [ApiController]
     [Route("api/person/v{version:apiVersion}")]
-    public class PersonController : ControllerBase
+    public class PersonV2Controller : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
         private IPersonService _personService;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonV2Controller(ILogger<PersonController> logger, IPersonService personService)
         {
             _logger = logger;
             _personService = personService;
