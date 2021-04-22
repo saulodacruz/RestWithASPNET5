@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestWithASPNET.Model.Context;
+using Microsoft.Net.Http.Headers;
 using RestWithASPNET.Business;
 using RestWithASPNET.Business.Implementations;
-using RestWithASPNET.Repository;
+using RestWithASPNET.Model.Context;
+using RestWithASPNET.Repository.Generic;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using RestWithASPNET.Repository.Generic;
 
 namespace RestWithASPNET
 {
@@ -39,6 +39,13 @@ namespace RestWithASPNET
 
             if (Environment.IsDevelopment())
                 MigrationDataBase(connection);
+
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+            }).AddXmlSerializerFormatters();
 
             //Versioning API
             services.AddApiVersioning();
