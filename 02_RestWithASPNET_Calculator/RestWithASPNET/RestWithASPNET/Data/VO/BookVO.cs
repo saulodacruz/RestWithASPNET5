@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace RestWithASPNET.Data.VO
 {
-    public class BookVO 
+    public class BookVO
     {
-        [JsonPropertyName("cocomuleque")]
+        [JsonPropertyName("id-book")]
         public long Id { get; set; }
 
         public string Author { get; set; }
